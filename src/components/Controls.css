@@ -1,0 +1,27 @@
+.controls {
+    display: flex;
+    gap: 6px;
+}
+
+.input {
+    flex-grow: 1;
+    border: 1px solid gray;
+    border-radius: 6px;
+    background-color: transparent;
+    padding: 4px 12px;
+    font-size: 16px;
+    line-height: 20px;
+    color: white;
+}
+
+.button,
+.select {
+    border: 1px solid gray;
+    border-radius: 6px;
+    background-color: #000;
+    font-size: 16px;
+    padding: 0 16px;
+    color: white;
+    flex-shrink: 0;
+}
+
