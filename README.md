@@ -55,7 +55,9 @@
 - slice를 활용해  Redux의 상태(state)와 관련된 `액션(action)과 리듀서(reducer)`를 더 쉽게 정의<br/>
 - useSelector와 useDispatch를 활용한 상태관리  <br/>
 - redux Thunk로 todo-List적용 <br/>
+- ` npx json-server server/db.json`로 서버 실행<br/>
 - `npm i json-server axios`설치<br/>
+- GET & POST & PATCH & DELETE &  api사용 
 
 
 

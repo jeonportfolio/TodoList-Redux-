@@ -14,7 +14,7 @@ export const fetchTodos = createAsyncThunk("todos/fetchTodos", async() => {
 
 export const createTodo = createAsyncThunk("todos/createTodo", async(text) => {
     const res = await api.post("/todos", {
-        id: Date.now(),
+        id: String(Date.now()),
         text,
         completed: false,
     });
@@ -23,12 +23,28 @@ export const createTodo = createAsyncThunk("todos/createTodo", async(text) => {
 
 
 
-export const updateTodo = createAsyncThunk('/todos/updateTodo', 
+export const updateTodo = createAsyncThunk('todos/updateTodo', 
     async({id, text}) => {
         const res = await api.patch(`/todos/${id}`, { text });
         return res.data;
     }
 );
+
+export const deleteTodo = createAsyncThunk('todos/deleteTodo', 
+    async(id) => {
+        await api.delete(`/todos/${id}`);
+        return id;
+    }
+);
+
+export const toggleTodo = createAsyncThunk('todos/toggleTodo', async({ id, completed }) => {
+    const res = await api.patch(`/todos/${id}`,{
+        completed,
+    });
+    return res.data;
+})
+
+
 export const todoSlice = createSlice({
     name: "todo",
     initialState,
@@ -90,14 +106,21 @@ export const todoSlice = createSlice({
                     }
                     return item;
                 });
+            }).addCase(deleteTodo.fulfilled,(state, action) => {
+                state.list = state.list.filter((item) => item.id !== action.payload )
+            }).addCase(toggleTodo.fulfilled,(state, action) => {
+                state.list = state.list.map((item) => {
+                    if(item.id === action.payload.id){
+                        return action.payload
+                    }
+                    return item;
+                });
             })
     }
 })
 
 export const {
     addTodo,
-    deleteTodo,
-    toggleTodo,
     toggleTodoAll,
     deleteTodoCompleted,
     setFilter

@@ -44,7 +44,7 @@ function TodoItem({ id, text, completed }) {
 
     // 한개 체크박스 선택
     const handleToggle = () => {
-        dispatch(toggleTodo(id));      
+        dispatch(toggleTodo({ id, completed: !completed}));      
     }
 
     // 삭제 
